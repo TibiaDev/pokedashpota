@@ -97,6 +97,7 @@ enum AttrTypes_t {
 	ATTR_ARMOR = 31,
 	ATTR_HITCHANCE = 32,
 	ATTR_SHOOTRANGE = 33,
+	ATTR_SPECIAL = 34,
 };
 
 enum Attr_ReadValue {
@@ -287,7 +288,7 @@ class ItemAttributes
 			return (type & 0x7FFE13) != 0;
 		}
 		inline static bool isStrAttrType(itemAttrTypes type) {
-			return (type & 0x1EC) != 0;
+			return (type & 0x8001EC) != 0;
 		}
 
 		const std::forward_list<Attribute>& getList() const {

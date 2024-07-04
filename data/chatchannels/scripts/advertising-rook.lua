@@ -1,5 +1,5 @@
 function canJoin(player)
-	return player:getVocation():getId() == VOCATION_NONE or player:getAccountType() >= ACCOUNT_TYPE_SENIORTUTOR
+	return player:getVocation():getId() == VOCATION_NONE or player:getVocation():getId() == 1 or player:getVocation():getId() == 2 or player:getVocation():getId() == 3 or player:getVocation():getId() == 4 or player:getVocation():getId() == 5 or player:getVocation():getId() == 6 or player:getAccountType() >= ACCOUNT_TYPE_SENIORTUTOR
 end
 
 local CHANNEL_ADVERTISING_ROOK = 6

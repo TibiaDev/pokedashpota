@@ -173,6 +173,8 @@ bool CreatureEvent::configureEvent(const pugi::xml_node& node)
 		type = CREATURE_EVENT_PREPAREDEATH;
 	} else if (tmpStr == "death") {
 		type = CREATURE_EVENT_DEATH;
+	} else if (tmpStr == "postdeath") { //pota
+		type = CREATURE_EVENT_POSTDEATH;
 	} else if (tmpStr == "kill") {
 		type = CREATURE_EVENT_KILL;
 	} else if (tmpStr == "advance") {
@@ -187,6 +189,8 @@ bool CreatureEvent::configureEvent(const pugi::xml_node& node)
 		type = CREATURE_EVENT_MANACHANGE;
 	} else if (tmpStr == "extendedopcode") {
 		type = CREATURE_EVENT_EXTENDED_OPCODE;
+	} else if (tmpStr == "move") {
+		type = CREATURE_EVENT_MOVE;
 	} else {
 		std::cout << "[Error - CreatureEvent::configureEvent] Invalid type for creature event: " << eventName << std::endl;
 		return false;
@@ -215,6 +219,9 @@ std::string CreatureEvent::getScriptEventName() const
 		case CREATURE_EVENT_DEATH:
 			return "onDeath";
 
+		case CREATURE_EVENT_POSTDEATH:
+			return "onPostDeath";
+
 		case CREATURE_EVENT_KILL:
 			return "onKill";
 
@@ -235,6 +242,9 @@ std::string CreatureEvent::getScriptEventName() const
 
 		case CREATURE_EVENT_EXTENDED_OPCODE:
 			return "onExtendedOpcode";
+
+		case CREATURE_EVENT_MOVE:
+			return "onMove";
 
 		case CREATURE_EVENT_NONE:
 		default:
@@ -350,6 +360,45 @@ bool CreatureEvent::executeOnDeath(Creature* creature, Item* corpse, Creature* k
 	//onDeath(creature, corpse, lasthitkiller, mostdamagekiller, lasthitunjustified, mostdamageunjustified)
 	if (!scriptInterface->reserveScriptEnv()) {
 		std::cout << "[Error - CreatureEvent::executeOnDeath] Call stack overflow" << std::endl;
+		return false;
+	}
+
+	ScriptEnvironment* env = scriptInterface->getScriptEnv();
+	env->setScriptId(scriptId, scriptInterface);
+
+	lua_State* L = scriptInterface->getLuaState();
+
+	scriptInterface->pushFunction(scriptId);
+	LuaScriptInterface::pushUserdata<Creature>(L, creature);
+	LuaScriptInterface::setCreatureMetatable(L, -1, creature);
+
+	LuaScriptInterface::pushThing(L, corpse);
+
+	if (killer) {
+		LuaScriptInterface::pushUserdata<Creature>(L, killer);
+		LuaScriptInterface::setCreatureMetatable(L, -1, killer);
+	} else {
+		lua_pushnil(L);
+	}
+
+	if (mostDamageKiller) {
+		LuaScriptInterface::pushUserdata<Creature>(L, mostDamageKiller);
+		LuaScriptInterface::setCreatureMetatable(L, -1, mostDamageKiller);
+	} else {
+		lua_pushnil(L);
+	}
+
+	LuaScriptInterface::pushBoolean(L, lastHitUnjustified);
+	LuaScriptInterface::pushBoolean(L, mostDamageUnjustified);
+
+	return scriptInterface->callFunction(6);
+}
+
+bool CreatureEvent::executeOnPostDeath(Creature* creature, Item* corpse, Creature* killer, Creature* mostDamageKiller, bool lastHitUnjustified, bool mostDamageUnjustified) //pota
+{
+	//onDeath(creature, corpse, lasthitkiller, mostdamagekiller, lasthitunjustified, mostdamageunjustified)
+	if (!scriptInterface->reserveScriptEnv()) {
+		std::cout << "[Error - CreatureEvent::executeOnPostDeath] Call stack overflow" << std::endl;
 		return false;
 	}
 
@@ -581,4 +630,26 @@ void CreatureEvent::executeExtendedOpcode(Player* player, uint8_t opcode, const 
 	LuaScriptInterface::pushString(L, buffer);
 
 	scriptInterface->callVoidFunction(3);
+}
+
+bool CreatureEvent::executeOnMove(Creature* creature, const Position& fromPosition, const Position& toPosition)
+{
+	//onMove(creature, frompos, topos)
+	if (!scriptInterface->reserveScriptEnv()) {
+		std::cout << "[Error - CreatureEvent::executeOnMove] Call stack overflow" << std::endl;
+		return false;
+	}
+
+	ScriptEnvironment* env = scriptInterface->getScriptEnv();
+	env->setScriptId(scriptId, scriptInterface);
+
+	lua_State* L = scriptInterface->getLuaState();
+	scriptInterface->pushFunction(scriptId);
+
+	LuaScriptInterface::pushUserdata(L, creature);
+	LuaScriptInterface::setMetatable(L, -1, "Creature");
+	LuaScriptInterface::pushPosition(L, fromPosition);
+	LuaScriptInterface::pushPosition(L, toPosition);
+
+	return scriptInterface->callFunction(3);
 }

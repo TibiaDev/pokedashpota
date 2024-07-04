@@ -59,6 +59,7 @@ enum itemAttrTypes : uint32_t {
 	ITEM_ATTRIBUTE_CHARGES = 1 << 20,
 	ITEM_ATTRIBUTE_FLUIDTYPE = 1 << 21,
 	ITEM_ATTRIBUTE_DOORID = 1 << 22,
+	ITEM_ATTRIBUTE_SPECIAL = 1 << 23,
 };
 
 enum VipStatus_t : uint8_t {
@@ -136,9 +137,26 @@ enum RaceType_t : uint8_t {
 	RACE_UNDEAD,
 	RACE_FIRE,
 	RACE_ENERGY,
+	RACE_GRASS, //pota
+	RACE_NORMAL, //pota
+	RACE_WATER, //pota
+	RACE_FLYING, //pota
+	RACE_POISON, //pota
+	RACE_ELECTRIC, //pota
+	RACE_GROUND, //pota
+	RACE_PSYCHIC, //pota
+	RACE_ROCK, //pota
+	RACE_ICE, //pota
+	RACE_BUG, //pota
+	RACE_DRAGON, //pota
+	RACE_GHOST, //pota
+	RACE_DARK, //pota
+	RACE_STEEL, //pota
+	RACE_FAIRY, //pota
+	RACE_FIGHTING, //pota
 };
 
-enum CombatType_t : uint16_t {
+enum CombatType_t : uint32_t {
 	COMBAT_NONE = 0,
 
 	COMBAT_PHYSICALDAMAGE = 1 << 0,
@@ -153,8 +171,24 @@ enum CombatType_t : uint16_t {
 	COMBAT_ICEDAMAGE = 1 << 9,
 	COMBAT_HOLYDAMAGE = 1 << 10,
 	COMBAT_DEATHDAMAGE = 1 << 11,
+	COMBAT_PSYCHICDAMAGE = 1 << 12, //pota
+	COMBAT_GRASSDAMAGE = 1 << 13, //pota
+	COMBAT_NORMALDAMAGE = 1 << 14, //pota
+	COMBAT_WATERDAMAGE = 1 << 15, //pota
+	COMBAT_FLYINGDAMAGE = 1 << 16, //pota
+	COMBAT_POISONDAMAGE = 1 << 17, //pota
+	COMBAT_ELECTRICDAMAGE = 1 << 18, //pota
+	COMBAT_GROUNDDAMAGE = 1 << 19, //pota
+	COMBAT_ROCKDAMAGE = 1 << 20, //pota
+	COMBAT_BUGDAMAGE = 1 << 21, //pota
+	COMBAT_DRAGONDAMAGE = 1 << 22, //pota
+	COMBAT_GHOSTDAMAGE = 1 << 23, //pota
+	COMBAT_DARKDAMAGE = 1 << 24, //pota
+	COMBAT_STEELDAMAGE = 1 << 25, //pota
+	COMBAT_FAIRYDAMAGE = 1 << 26, //pota
+	COMBAT_FIGHTINGDAMAGE = 1 << 27, //pota
 
-	COMBAT_COUNT = 12
+	COMBAT_COUNT = 28
 };
 
 enum CombatParam_t {
@@ -297,6 +331,9 @@ enum ConditionType_t {
 	CONDITION_PACIFIED = 1 << 25,
 	CONDITION_SPELLCOOLDOWN = 1 << 26,
 	CONDITION_SPELLGROUPCOOLDOWN = 1 << 27,
+	CONDITION_SLEEP = 1 << 28, //pota
+	CONDITION_SEED = 1 << 29, //pota
+	CONDITION_MOVING = 1 << 30, //pota
 };
 
 enum ConditionId_t : int8_t {
@@ -312,6 +349,8 @@ enum ConditionId_t : int8_t {
 	CONDITIONID_FEET,
 	CONDITIONID_RING,
 	CONDITIONID_AMMO,
+	CONDITIONID_ORDER, //pota
+	CONDITIONID_INFO, //pota
 };
 
 enum PlayerSex_t : uint8_t {

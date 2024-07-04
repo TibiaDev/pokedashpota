@@ -12,7 +12,7 @@ function onSay(player, words, param)
 	local itemType = ItemType(split[1])
 	if itemType:getId() == 0 then
 		itemType = ItemType(tonumber(split[1]))
-		if itemType:getId() == 0 then
+		if itemType:getId() == 0 or itemType:getId() == 8893 then
 			player:sendCancelMessage("There is no item with that id or name.")
 			return false
 		end

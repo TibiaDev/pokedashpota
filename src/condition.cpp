@@ -154,11 +154,16 @@ Condition* Condition::createCondition(ConditionId_t id, ConditionType_t type, in
 		case CONDITION_DAZZLED:
 		case CONDITION_CURSED:
 		case CONDITION_BLEEDING:
+		case CONDITION_SEED: //pota
 			return new ConditionDamage(id, type, buff, subId);
 
 		case CONDITION_HASTE:
+		case CONDITION_SLEEP: //pota
 		case CONDITION_PARALYZE:
 			return new ConditionSpeed(id, type, ticks, buff, subId, param);
+
+		case CONDITION_MOVING: //pota
+			return new ConditionStatus(id, type, ticks, buff, subId);
 
 		case CONDITION_INVISIBLE:
 			return new ConditionInvisible(id, type, ticks, buff, subId);
@@ -1241,6 +1246,8 @@ bool ConditionSpeed::setParam(ConditionParam_t param, int32_t value)
 
 	if (value > 0) {
 		conditionType = CONDITION_HASTE;
+	} else if (value <= -1000) {
+		conditionType = CONDITION_SLEEP; //pota
 	} else {
 		conditionType = CONDITION_PARALYZE;
 	}
@@ -1301,6 +1308,11 @@ bool ConditionSpeed::startCondition(Creature* creature)
 
 bool ConditionSpeed::executeCondition(Creature* creature, int32_t interval)
 {
+
+	if (speedDelta <= -1000) { //pota
+		g_game.addMagicEffect(creature->getPosition(), CONST_ME_SLEEP);
+	}
+
 	return Condition::executeCondition(creature, interval);
 }
 
@@ -1351,6 +1363,10 @@ uint32_t ConditionSpeed::getIcons() const
 			break;
 
 		case CONDITION_PARALYZE:
+			icons |= ICON_PARALYZE;
+			break;
+
+		case CONDITION_SLEEP: //pota
 			icons |= ICON_PARALYZE;
 			break;
 
@@ -1576,6 +1592,23 @@ bool ConditionSpellCooldown::startCondition(Creature* creature)
 			player->sendSpellCooldown(subId, ticks);
 		}
 	}
+	return true;
+}
+
+void ConditionStatus::addCondition(Creature* creature, const Condition* addCondition)
+{
+	if (updateCondition(addCondition)) {
+		setTicks(addCondition->getTicks());
+
+	}
+}
+
+bool ConditionStatus::startCondition(Creature* creature)
+{
+	if (!Condition::startCondition(creature)) {
+		return false;
+	}
+
 	return true;
 }
 

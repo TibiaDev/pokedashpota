@@ -11,8 +11,8 @@ function onSay(player, words, param)
 	local position = player:getPosition()
 	position:getNextPosition(player:getDirection(), steps)
 
-	position = player:getClosestFreePosition(position, false)
-	if position.x == 0 then
+--	position = player:getClosestFreePosition(position, false)
+	if not position or position.x == 0 then
 		player:sendCancelMessage("You cannot teleport there.")
 		return false
 	end

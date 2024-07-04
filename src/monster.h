@@ -40,11 +40,11 @@ enum TargetSearchType_t {
 class Monster final : public Creature
 {
 	public:
-		static Monster* createMonster(const std::string& name);
+		static Monster* createMonster(const std::string& name, uint16_t lvl, uint16_t bst);
 		static int32_t despawnRange;
 		static int32_t despawnRadius;
 
-		explicit Monster(MonsterType* mtype);
+		explicit Monster(MonsterType* mtype, uint16_t lvl, uint16_t bst);
 		~Monster();
 
 		// non-copyable
@@ -91,6 +91,10 @@ class Monster final : public Creature
 		RaceType_t getRace() const final {
 			return mType->info.race;
 		}
+
+		RaceType_t getRace2() const final {
+			return mType->info.race2;
+		}
 		int32_t getArmor() const final {
 			return mType->info.armor;
 		}
@@ -104,6 +108,23 @@ class Monster final : public Creature
 			return mType->info.isAttackable;
 		}
 
+		uint16_t getLevel() const { //pota
+			return level;
+		}
+
+		uint16_t getBoost() const { //pota
+			return boost;
+		}
+
+		//get exp from monsters
+		uint64_t getExperience() const {
+			return monsterExperience;
+		}
+
+		void setExperience(uint64_t value) {
+			monsterExperience = value;
+		}
+
 		bool canPushItems() const {
 			return mType->info.canPushItems;
 		}
@@ -113,6 +134,60 @@ class Monster final : public Creature
 		bool isHostile() const {
 			return mType->info.isHostile;
 		}
+
+		bool isPassive() const { //pota
+			return mType->info.isPassive;
+		}
+
+		int32_t isFlyable() const {
+			return mType->info.isFlyable;
+		}
+
+		int32_t isRideable() const {
+			return mType->info.isRideable;
+		}
+
+		int32_t isSurfable() const {
+			return mType->info.isSurfable;
+		}
+
+		bool canTeleport() const {
+			return mType->info.canTeleport;
+		}
+
+		int32_t catchChance() const {
+			return mType->info.catchChance;
+		}
+
+		int32_t getMoveMagicAttackBase() const {
+			return mType->info.moveMagicAttackBase;
+		}
+
+		int32_t getMoveMagicDefenseBase() const {
+			return mType->info.moveMagicDefenseBase;
+		}
+
+		int32_t hasShiny() const {
+			return mType->info.hasShiny;
+		}
+
+		int32_t hasMega() const {
+			return mType->info.hasMega;
+		}
+
+		int32_t dexEntry() const {
+			return mType->info.dexEntry;
+		}
+
+		int32_t portraitId() const {
+			return mType->info.portraitId;
+		}
+
+
+
+
+
+
 		bool canSee(const Position& pos) const final;
 		bool canSeeInvisibility() const final {
 			return isImmune(CONDITION_INVISIBLE);
@@ -193,8 +268,13 @@ class Monster final : public Creature
 		uint32_t yellTicks = 0;
 		int32_t minCombatValue = 0;
 		int32_t maxCombatValue = 0;
+		std::string name; //pota
 		int32_t targetChangeCooldown = 0;
 		int32_t stepDuration = 0;
+		uint16_t level; //pota
+		uint16_t lvl; //pota
+		uint16_t boost; //pota
+		uint16_t bst; //pota
 
 		Position masterPos;
 

@@ -174,7 +174,7 @@ class ProtocolGame final : public Protocol
 		void sendFYIBox(const std::string& message);
 
 		void sendDistanceShoot(const Position& from, const Position& to, uint8_t type);
-		void sendMagicEffect(const Position& pos, uint8_t type);
+		void sendMagicEffect(const Position& pos, uint16_t type);
 		void sendCreatureHealth(const Creature* creature);
 		void sendSkills();
 		void sendPing();
@@ -192,6 +192,7 @@ class ProtocolGame final : public Protocol
 		void sendStats();
 		void sendBasicData();
 		void sendTextMessage(const TextMessage& message);
+		void sendAnimatedMessage(const TextMessage& message);
 		void sendReLoginWindow(uint8_t unfairFightReduction);
 
 		void sendTutorial(uint8_t tutorialId);

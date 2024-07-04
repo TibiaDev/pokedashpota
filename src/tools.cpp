@@ -677,6 +677,22 @@ CombatTypeNames combatTypeNames[] = {
 	{"ice",			COMBAT_ICEDAMAGE},
 	{"holy",		COMBAT_HOLYDAMAGE},
 	{"death",		COMBAT_DEATHDAMAGE},
+	{"psychic",		COMBAT_PSYCHICDAMAGE},
+	{"grass",		COMBAT_GRASSDAMAGE},
+	{"normal",		COMBAT_NORMALDAMAGE},
+	{"water",		COMBAT_WATERDAMAGE},
+	{"flying",		COMBAT_FLYINGDAMAGE},
+	{"poison",		COMBAT_POISONDAMAGE},
+	{"electric",		COMBAT_ELECTRICDAMAGE},
+	{"ground",		COMBAT_GROUNDDAMAGE},
+	{"rock",		COMBAT_ROCKDAMAGE},
+	{"bug",			COMBAT_BUGDAMAGE},
+	{"dragon",		COMBAT_DRAGONDAMAGE},
+	{"ghost",		COMBAT_GHOSTDAMAGE},
+	{"dark",		COMBAT_DARKDAMAGE},
+	{"steel",		COMBAT_STEELDAMAGE},
+	{"fairy",		COMBAT_FAIRYDAMAGE},
+	{"fighting",		COMBAT_FIGHTINGDAMAGE},
 };
 
 AmmoTypeNames ammoTypeNames[] = {
@@ -930,6 +946,38 @@ size_t combatTypeToIndex(CombatType_t combatType)
 			return 10;
 		case COMBAT_DEATHDAMAGE:
 			return 11;
+		case COMBAT_PSYCHICDAMAGE: //pota
+			return 12;
+		case COMBAT_GRASSDAMAGE: //pota
+			return 13;
+		case COMBAT_NORMALDAMAGE: //pota
+			return 14;
+		case COMBAT_WATERDAMAGE: //pota
+			return 15;
+		case COMBAT_FLYINGDAMAGE: //pota
+			return 16;
+		case COMBAT_POISONDAMAGE: //pota
+			return 17;
+		case COMBAT_ELECTRICDAMAGE: //pota
+			return 18;
+		case COMBAT_GROUNDDAMAGE: //pota
+			return 19;
+		case COMBAT_ROCKDAMAGE: //pota
+			return 20;
+		case COMBAT_BUGDAMAGE: //pota
+			return 21;
+		case COMBAT_DRAGONDAMAGE: //pota
+			return 22;
+		case COMBAT_GHOSTDAMAGE: //pota
+			return 23;
+		case COMBAT_DARKDAMAGE: //pota
+			return 24;
+		case COMBAT_STEELDAMAGE: //pota
+			return 25;
+		case COMBAT_FAIRYDAMAGE: //pota
+			return 26;
+		case COMBAT_FIGHTINGDAMAGE: //pota
+			return 27;
 		default:
 			return 0;
 	}

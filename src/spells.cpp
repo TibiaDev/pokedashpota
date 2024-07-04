@@ -1460,7 +1460,7 @@ bool InstantSpell::SummonMonster(const InstantSpell* spell, Creature* creature, 
 		}
 	}
 
-	Monster* monster = Monster::createMonster(param);
+	Monster* monster = Monster::createMonster(param, 0, 0); //pota
 	if (!monster) {
 		player->sendCancelMessage(RETURNVALUE_NOTPOSSIBLE);
 		g_game.addMagicEffect(player->getPosition(), CONST_ME_POFF);

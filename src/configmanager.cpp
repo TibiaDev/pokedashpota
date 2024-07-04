@@ -90,6 +90,7 @@ bool ConfigManager::load()
 	string[LOCATION] = getGlobalString(L, "location", "");
 	string[MOTD] = getGlobalString(L, "motd", "");
 	string[WORLD_TYPE] = getGlobalString(L, "worldType", "pvp");
+	string[MONSTERLEVEL_PREFIX] = getGlobalString(L, "monsterPrefix", ""); //pota
 
 	integer[MAX_PLAYERS] = getGlobalNumber(L, "maxPlayers");
 	integer[PZ_LOCKED] = getGlobalNumber(L, "pzLocked", 60000);
@@ -117,6 +118,12 @@ bool ConfigManager::load()
 	integer[CHECK_EXPIRED_MARKET_OFFERS_EACH_MINUTES] = getGlobalNumber(L, "checkExpiredMarketOffersEachMinutes", 60);
 	integer[MAX_MARKET_OFFERS_AT_A_TIME_PER_PLAYER] = getGlobalNumber(L, "maxMarketOffersAtATimePerPlayer", 100);
 	integer[MAX_PACKETS_PER_SECOND] = getGlobalNumber(L, "maxPacketsPerSecond", 25);
+
+	decimal[MONSTERLEVEL_BONUSDMG] = getGlobalDouble(L, "monsterLevelDamage", 0.0); //pota
+	decimal[MONSTERLEVEL_BONUSEXP] = getGlobalDouble(L, "monsterLevelExp", 0.0); //pota
+	decimal[MONSTERLEVEL_BONUSSPEED] = getGlobalDouble(L, "monsterLevelSpeed", 0.0); //pota
+	decimal[MONSTERLEVEL_BONUSHEALTH] = getGlobalDouble(L, "monsterLevelHealth", 0.0); //pota
+	decimal[MONSTERLEVEL_BONUSLOOT] = getGlobalDouble(L, "monsterLevelLoot", 0.0); //pota
 
 	loaded = true;
 	lua_close(L);
@@ -157,6 +164,15 @@ bool ConfigManager::getBoolean(boolean_config_t what) const
 		return false;
 	}
 	return boolean[what];
+}
+
+double ConfigManager::getDouble(double_config_t what) const //pota
+{
+	if (what >= LAST_DOUBLE_CONFIG) {
+		std::cout << "[Warning - ConfigManager::getDouble] Accessing invalid index: " << what << std::endl;
+		return 0.0;
+	}
+	return decimal[what];
 }
 
 std::string ConfigManager::getGlobalString(lua_State* L, const char* identifier, const char* defaultValue)
@@ -201,4 +217,16 @@ bool ConfigManager::getGlobalBoolean(lua_State* L, const char* identifier, const
 	int val = lua_toboolean(L, -1);
 	lua_pop(L, 1);
 	return val != 0;
+}
+
+double ConfigManager::getGlobalDouble(lua_State* L, const char* identifier, const double defaultValue) //pota
+{
+	lua_getglobal(L, identifier);
+	if (!lua_isnumber(L, -1)) {
+		return defaultValue;
+	}
+
+	double val = lua_tonumber(L, -1);
+	lua_pop(L, 1);
+	return val;
 }

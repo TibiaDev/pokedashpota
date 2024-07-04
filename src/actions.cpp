@@ -230,7 +230,7 @@ ReturnValue Actions::canUseFar(const Creature* creature, const Position& toPos, 
 		return creaturePos.z > toPos.z ? RETURNVALUE_FIRSTGOUPSTAIRS : RETURNVALUE_FIRSTGODOWNSTAIRS;
 	}
 
-	if (!Position::areInRange<7, 5>(toPos, creaturePos)) {
+	if (!Position::areInRange<10, 5>(toPos, creaturePos)) { //pota
 		return RETURNVALUE_TOOFARAWAY;
 	}
 

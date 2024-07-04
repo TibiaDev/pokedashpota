@@ -3,15 +3,70 @@
 	<!-- Quests -->
 	<action itemid="1740" script="quests/quests.lua" />
 	<action fromid="1747" toid="1749" script="quests/quests.lua" />
+	<action fromid="1353" toid="1355" script="quests/quests.lua" />
+	<action itemid="1407" script="quests/quests.lua" />
+	<action itemid="12664" script="quests/quests.lua" />
 	<action uniqueid="30015" script="quests/annihilator.lua" />
+	<action uniqueid="30000" script="quests/moltres.lua" />
 
 	<!-- Tools -->
 	<action itemid="2420" script="tools/machete.lua" />
 	<action itemid="2550" script="tools/scythe.lua" />
 	<action itemid="2580" script="tools/fishing.lua" allowfaruse="1" />
+	<action itemid="26820" script="tools/fishing.lua" allowfaruse="1" />
 	<action itemid="2554" script="tools/shovel.lua" />
 	<action itemid="2120" script="tools/rope.lua" />
+	<action itemid="38682" script="tools/rope.lua" />
+	<action itemid="27640" script="tools/new_rope.lua" />
 	<action itemid="2553" script="tools/pick.lua" />
+
+	<action itemid="7575" script="poke/dive.lua" />
+
+	<!-- Pokemon -->
+	<action itemid="2272" script="poke/catch.lua" allowfaruse="1" />
+	<action fromid="38779" toid="38787" script="poke/vitamin.lua" allowfaruse="1" />
+	<action itemid="38681" script="poke/coincounter.lua" />
+	<!-- Balls catch-->
+	<action itemid="26662" script="poke/catch.lua" allowfaruse="1" />
+	<action itemid="26660" script="poke/catch.lua" allowfaruse="1" />
+	<action itemid="26659" script="poke/catch.lua" allowfaruse="1" />
+	<action itemid="26688" script="poke/catch.lua" allowfaruse="1" />
+	<action itemid="26683" script="poke/catch.lua" allowfaruse="1" />
+	<action itemid="26685" script="poke/catch.lua" allowfaruse="1" />
+
+	<action itemid="2267" script="poke/revive.lua" allowfaruse="1" />
+	<action itemid="27645" script="poke/revive.lua" allowfaruse="1" />
+	<action itemid="2273" script="poke/healrune.lua" allowfaruse="1" />
+	<action itemid="27646" script="poke/healrune.lua" allowfaruse="1" />
+	<action itemid="2325" script="poke/summon.lua" />
+	<action itemid="26661" script="poke/summon.lua" />
+	<action itemid="26672" script="poke/summon.lua" />
+	<action itemid="26663" script="poke/summon.lua" />
+	<action itemid="26675" script="poke/summon.lua" />
+	<action itemid="26669" script="poke/summon.lua" />
+	<action itemid="26674" script="poke/summon.lua" />
+	<action itemid="26670" script="poke/summon.lua" />
+	<action itemid="26681" script="poke/summon.lua" />
+	<action itemid="26666" script="poke/summon.lua" />
+	<action itemid="26678" script="poke/summon.lua" />
+	<action itemid="26667" script="poke/summon.lua" />
+	<action itemid="26679" script="poke/summon.lua" />
+
+
+	<action itemid="2263" script="poke/pokedex.lua" allowfaruse="1" />
+	<action itemid="2270" script="poke/order.lua" allowfaruse="1" />
+	<action itemid="2291" script="poke/evolution.lua" allowfaruse="1" />
+	<action fromid="26723" toid="26736" script="poke/evolution.lua" allowfaruse="1" />
+	<action fromid="26742" toid="26748" script="poke/evolution.lua" allowfaruse="1" />
+	<action itemid="26749" script="poke/evolution.lua" allowfaruse="1" />
+
+	<action itemid="26693" script="poke/boost.lua" />
+	<action itemid="27634" script="poke/bike.lua" />
+	<action fromid="26772" toid="26773" script="poke/train.lua" />
+
+	<action itemid="26764" script="poke/box.lua" />
+	<action fromid="26812" toid="26819" script="poke/box.lua" />
+
 
 	<!-- Increase/Decrease ItemId -->
 	<action itemid="1873" function="increaseItemId" />
@@ -191,7 +246,7 @@
 	<action itemid="1775" script="other/fluids.lua" />
 	<action fromid="2031" toid="2034" script="other/fluids.lua" />
 	<action fromid="2574" toid="2577" script="other/fluids.lua" />
-	<action fromid="5792" toid="5797" script="other/die.lua" />
+	<action itemid="23582" script="other/die.lua" />
 	<action itemid="7588" script="other/potions.lua" />
 	<action itemid="7589" script="other/potions.lua" />
 	<action itemid="7590" script="other/potions.lua" />
@@ -254,6 +309,7 @@
 	<action fromid="17235" toid="17238" script="other/doors.lua" />
 	<action fromid="18208" toid="18209" script="other/doors.lua" />
 	<action fromid="13020" toid="13023" script="other/doors.lua" />
+	<action fromid="35089" toid="35092" script="other/doors.lua" />
 	<action itemid="14405" function="market" />
 	<action fromid="18488" toid="18492" script="other/skilltrainer.lua" />
 	<action itemid="3743" script="other/transforms.lua" />

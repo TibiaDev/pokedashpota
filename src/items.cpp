@@ -446,7 +446,7 @@ void Items::parseItemNode(const pugi::xml_node& itemNode, uint16_t id)
 			} else {
 				std::cout << "[Warning - Items::parseItemNode] Unknown floorChange: " << valueAttribute.as_string() << std::endl;
 			}
-		} else if (tmpStrValue == "corpsetype") {
+		} else if (tmpStrValue == "corpsetype") { //pota
 			tmpStrValue = asLowerCaseString(valueAttribute.as_string());
 			if (tmpStrValue == "venom") {
 				it.corpseType = RACE_VENOM;
@@ -458,6 +458,40 @@ void Items::parseItemNode(const pugi::xml_node& itemNode, uint16_t id)
 				it.corpseType = RACE_FIRE;
 			} else if (tmpStrValue == "energy") {
 				it.corpseType = RACE_ENERGY;
+			} else if (tmpStrValue == "grass") {
+				it.corpseType = RACE_GRASS;
+			} else if (tmpStrValue == "normal") {
+				it.corpseType = RACE_NORMAL;
+			} else if (tmpStrValue == "water") {
+				it.corpseType = RACE_WATER;
+			} else if (tmpStrValue == "flying") {
+				it.corpseType = RACE_FLYING;
+			} else if (tmpStrValue == "poison") {
+				it.corpseType = RACE_POISON;
+			} else if (tmpStrValue == "electric") {
+				it.corpseType = RACE_ELECTRIC;
+			} else if (tmpStrValue == "ground") {
+				it.corpseType = RACE_GROUND;
+			} else if (tmpStrValue == "psychic") {
+				it.corpseType = RACE_PSYCHIC;
+			} else if (tmpStrValue == "rock") {
+				it.corpseType = RACE_ROCK;
+			} else if (tmpStrValue == "ice") {
+				it.corpseType = RACE_ICE;
+			} else if (tmpStrValue == "bug") {
+				it.corpseType = RACE_BUG;
+			} else if (tmpStrValue == "dragon") {
+				it.corpseType = RACE_DRAGON;
+			} else if (tmpStrValue == "ghost") {
+				it.corpseType = RACE_GHOST;
+			} else if (tmpStrValue == "dark") {
+				it.corpseType = RACE_DARK;
+			} else if (tmpStrValue == "steel") {
+				it.corpseType = RACE_STEEL;
+			} else if (tmpStrValue == "fairy") {
+				it.corpseType = RACE_FAIRY;
+			} else if (tmpStrValue == "fighting") {
+				it.corpseType = RACE_FIGHTING;
 			} else {
 				std::cout << "[Warning - Items::parseItemNode] Unknown corpseType: " << valueAttribute.as_string() << std::endl;
 			}
@@ -560,6 +594,10 @@ void Items::parseItemNode(const pugi::xml_node& itemNode, uint16_t id)
 				it.slotPosition |= SLOTP_AMMO;
 			} else if (tmpStrValue == "hand") {
 				it.slotPosition |= SLOTP_HAND;
+			} else if (tmpStrValue == "order") { //pota
+				it.slotPosition |= SLOTP_ORDER;
+			} else if (tmpStrValue == "info") { //pota
+				it.slotPosition |= SLOTP_INFO;
 			} else {
 				std::cout << "[Warning - Items::parseItemNode] Unknown slotType: " << valueAttribute.as_string() << std::endl;
 			}

@@ -1,5 +1,6 @@
 function onSay(player, words, param)
-	if not getPlayerFlagValue(player, PlayerFlag_CanBroadcast) then
+--	if not getPlayerFlagValue(player, PlayerFlag_CanBroadcast) then
+	if player:getAccountType() < ACCOUNT_TYPE_TUTOR then
 		return true
 	end
 

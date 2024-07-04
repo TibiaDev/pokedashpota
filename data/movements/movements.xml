@@ -1,5 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <movements>
+	<!-- 
+	<movevent event="DeEquip" itemid="2325" script="pokeball.lua" />
+	<movevent event="DeEquip" itemid="26661" script="pokeball.lua" />
+	<movevent event="DeEquip" itemid="26672" script="pokeball.lua" />
+	<movevent event="DeEquip" itemid="26663" script="pokeball.lua" />
+	<movevent event="DeEquip" itemid="26675" script="pokeball.lua" />
+	<movevent event="DeEquip" itemid="26669" script="pokeball.lua" />
+	<movevent event="DeEquip" itemid="26674" script="pokeball.lua" />
+	<movevent event="DeEquip" itemid="26670" script="pokeball.lua" />
+	<movevent event="DeEquip" itemid="26681" script="pokeball.lua" />
+	<movevent event="DeEquip" itemid="26666" script="pokeball.lua" />
+	<movevent event="DeEquip" itemid="26678" script="pokeball.lua" />
+	<movevent event="DeEquip" itemid="26667" script="pokeball.lua" />
+	<movevent event="DeEquip" itemid="26679" script="pokeball.lua" />
+	<movevent event="DeEquip" itemid="8922" script="pokeball.lua" />
+	<movevent event="DeEquip" itemid="18409" script="pokeball.lua" />
+
+	<movevent event="Equip" itemid="2325" slot="ammo" script="pokeball.lua" />
+	<movevent event="Equip" itemid="26661" slot="ammo" script="pokeball.lua" />
+	<movevent event="Equip" itemid="26672" slot="ammo" script="pokeball.lua" />
+	<movevent event="Equip" itemid="26663" slot="ammo" script="pokeball.lua" />
+	<movevent event="Equip" itemid="26675" slot="ammo" script="pokeball.lua" />
+	<movevent event="Equip" itemid="26669" slot="ammo" script="pokeball.lua" />
+	<movevent event="Equip" itemid="26674" slot="ammo" script="pokeball.lua" />
+	<movevent event="Equip" itemid="26670" slot="ammo" script="pokeball.lua" />
+	<movevent event="Equip" itemid="26681" slot="ammo" script="pokeball.lua" />
+	<movevent event="Equip" itemid="26666" slot="ammo" script="pokeball.lua" />
+	<movevent event="Equip" itemid="26678" slot="ammo" script="pokeball.lua" />
+	<movevent event="Equip" itemid="26667" slot="ammo" script="pokeball.lua" />
+	<movevent event="Equip" itemid="26679" slot="ammo" script="pokeball.lua" />
+	<movevent event="Equip" itemid="8922" slot="ammo" script="pokeball.lua" />
+	<movevent event="Equip" itemid="18409" slot="ammo" script="pokeball.lua" /> 
+
+	<movevent event="StepIn" itemid="10398" script="sendtutorial.lua" />
+	<movevent event="StepIn" itemid="10403" script="sendtutorial.lua" />
+	<movevent event="StepIn" itemid="10401" script="sendtutorial.lua" />
+	<movevent event="StepIn" fromid="26796" toid="26811" script="sendtutorial.lua" /> Pokeball -->
+	<movevent event="StepIn" actionid="100" script="premium_tile.lua" />
+	<movevent event="StepIn" actionid="101" script="legendary_tile.lua" />
+	<movevent event="StepIn" actionid="102" script="teleporttc.lua" />
+	<movevent event="StepIn" actionid="103" script="teleporttc.lua" />
+	<movevent event="StepIn" actionid="104" script="opendoor.lua" />
+	<movevent event="StepIn" actionid="110" script="prerequisite.lua" />
+	<movevent event="StepIn" actionid="111" script="prerequisite.lua" />
+	<movevent event="StepIn" actionid="112" script="prerequisite.lua" />
+
+	<!-- Citizen teleport -->
+	<movevent event="StepIn" itemid="1387" script="citizen.lua" />
+	<movevent event="StepIn" itemid="1397" script="citizen.lua" />
+	<movevent event="StepIn" fromid="5023" toid="5024" script="citizen.lua" />
+	<movevent event="StepIn" fromid="12509" toid="12510" script="citizen.lua" />
+	<movevent event="StepIn" itemid="9110" script="citizen.lua" />
+
 	<!-- Decaying tiles -->
 	<movevent event="StepIn" itemid="293" script="decay.lua" />
 	<movevent event="StepIn" itemid="461" script="decay.lua" />
@@ -24,9 +77,6 @@
 	<movevent event="RemoveItem" itemid="2579" script="trap.lua" />
 	<movevent event="StepIn" itemid="4208" script="trap.lua" />
 	<movevent event="StepOut" itemid="4209" script="trap.lua" />
-
-	<!-- Citizen teleport -->
-	<movevent event="StepIn" itemid="1387" script="citizen.lua" />
 
 	<!-- Walkback when walking on quest chest -->
 	<movevent event="StepIn" itemid="1738" script="walkback.lua" />
@@ -183,7 +233,6 @@
 	<movevent event="StepOut" itemid="12105" script="closingdoor.lua" />
 	<movevent event="StepIn" itemid="12105" script="quest_door.lua" />
 	<movevent event="StepOut" itemid="12194" script="closingdoor.lua" />
-	<movevent event="StepIn" itemid="12194" script="quest_door.lua" />
 	<movevent event="StepOut" itemid="12196" script="closingdoor.lua" />
 	<movevent event="StepIn" itemid="12196" script="level_door.lua" />
 	<movevent event="StepOut" itemid="12203" script="closingdoor.lua" />
@@ -224,6 +273,8 @@
 	<movevent event="AddItem" tileitem="1" itemid="1788" script="dough.lua" />
 	<movevent event="AddItem" tileitem="1" itemid="1790" script="dough.lua" />
 	<movevent event="AddItem" tileitem="1" itemid="1792" script="dough.lua" />
+
+	<movevent event="AddItem" tileitem="1" itemid="26564" script="soccerevent.lua" />
 
 	<!-- Campfires -->
 	<movevent event="StepIn" itemid="1423" function="onStepInField" />
@@ -280,8 +331,12 @@
 	<movevent event="AddItem" itemid="7360" function="onAddField" />
 
 	<!-- Swimming -->
-	<movevent event="StepIn" fromid="4620" toid="4625" script="swimming.lua" />
-	<movevent event="StepOut" fromid="4620" toid="4625" script="swimming.lua" />
+	<movevent event="StepIn" fromid="4608" toid="4625" script="swimming.lua" />
+	<movevent event="StepOut" fromid="4608" toid="4625" script="swimming.lua" />
+	<movevent event="StepIn" fromid="4664" toid="4666" script="swimming.lua" />
+	<movevent event="StepOut" fromid="4664" toid="4666" script="swimming.lua" />
+	<movevent event="StepIn" fromid="4820" toid="4825" script="swimming.lua" />
+	<movevent event="StepOut" fromid="4820" toid="4825" script="swimming.lua" />
 	<movevent event="StepIn" itemid="5405" script="drowning.lua" />
 	<movevent event="StepOut" itemid="5405" script="drowning.lua" />
 
@@ -973,9 +1028,7 @@
 		<vocation name="Master Sorcerer" showInDescription="0" />
 	</movevent>
 	<movevent event="DeEquip" itemid="18390" slot="hand" function="onDeEquipItem" />
-	<movevent event="Equip" itemid="18409" slot="hand" level="65" function="onEquipItem">
-		<vocation name="Sorcerer" />
-		<vocation name="Master Sorcerer" showInDescription="0" />
+	<movevent event="Equip" itemid="18409" slot="hand" function="onEquipItem">
 	</movevent>
 	<movevent event="DeEquip" itemid="18409" slot="hand" function="onDeEquipItem" />
 	<movevent event="Equip" itemid="18411" slot="hand" level="65" function="onEquipItem">

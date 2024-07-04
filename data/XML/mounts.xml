@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mounts>
+<!--
 	<mount id="1" clientid="368" name="Widow Queen" speed="20" premium="yes" />
 	<mount id="2" clientid="369" name="Racing Bird" speed="20" premium="yes" />
 	<mount id="3" clientid="370" name="War Bear" speed="20" premium="yes" />
@@ -101,5 +102,5 @@
 	<mount id="99" clientid="890" name="Vortexion" speed="20" premium="yes" />
 	<mount id="100" clientid="901" name="Ivory Fang" speed="20" premium="yes" />
 	<mount id="101" clientid="902" name="Shadow Claw" speed="20" premium="yes" />
-	<mount id="102" clientid="903" name="Snow Pelt" speed="20" premium="yes" />
+	<mount id="102" clientid="903" name="Snow Pelt" speed="20" premium="yes" /> --> 
 </mounts>

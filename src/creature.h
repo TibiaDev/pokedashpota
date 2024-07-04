@@ -43,9 +43,11 @@ enum slots_t : uint8_t {
 	CONST_SLOT_FEET = 8,
 	CONST_SLOT_RING = 9,
 	CONST_SLOT_AMMO = 10,
+	CONST_SLOT_ORDER = 11, //pota
+	CONST_SLOT_INFO = 12, //pota
 
 	CONST_SLOT_FIRST = CONST_SLOT_HEAD,
-	CONST_SLOT_LAST = CONST_SLOT_AMMO,
+	CONST_SLOT_LAST = CONST_SLOT_INFO, //pota
 };
 
 struct FindPathParams {
@@ -151,6 +153,11 @@ class Creature : virtual public Thing
 		virtual RaceType_t getRace() const {
 			return RACE_NONE;
 		}
+
+		virtual RaceType_t getRace2() const { //pota
+			return RACE_NONE;
+		}
+
 		virtual Skulls_t getSkull() const {
 			return skull;
 		}
@@ -225,6 +232,10 @@ class Creature : virtual public Thing
 		}
 		virtual int32_t getMaxHealth() const {
 			return healthMax;
+		}
+		//get exp from monsters
+		virtual uint64_t getMonsterExperience() const {
+			return monsterExperience;
 		}
 		uint32_t getMana() const {
 			return mana;
@@ -510,6 +521,8 @@ class Creature : virtual public Thing
 		int32_t varSpeed = 0;
 		int32_t health = 1000;
 		int32_t healthMax = 1000;
+		//get exp from monsters
+		uint64_t monsterExperience = 0;
 
 		Outfit_t currentOutfit;
 		Outfit_t defaultOutfit;

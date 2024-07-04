@@ -415,6 +415,8 @@ class LuaScriptInterface
 		static bool getArea(lua_State* L, std::list<uint32_t>& list, uint32_t& rows);
 
 		//lua functions
+		static int luaDoCreatureCastSpell(lua_State* L); //pota
+
 		static int luaDoCreateItem(lua_State* L);
 		static int luaDoCreateItemEx(lua_State* L);
 		static int luaDoMoveCreature(lua_State* L);
@@ -422,6 +424,8 @@ class LuaScriptInterface
 		static int luaDoPlayerAddItem(lua_State* L);
 		static int luaDoTileAddItemEx(lua_State* L);
 		static int luaDoSetCreatureLight(lua_State* L);
+
+		static int luaGetCombatName(lua_State* L); //pota
 
 		//get item info
 		static int luaGetDepotId(lua_State* L);
@@ -439,6 +443,8 @@ class LuaScriptInterface
 
 		//type validation
 		static int luaIsDepot(lua_State* L);
+		static int luaGetMonstersName(lua_State* L); //pota
+
 		static int luaIsMoveable(lua_State* L);
 		static int luaIsValidUID(lua_State* L);
 
@@ -551,6 +557,8 @@ class LuaScriptInterface
 		static int luaGameCreateTile(lua_State* L);
 
 		static int luaGameStartRaid(lua_State* L);
+
+		static int luaGameSendAnimatedText(lua_State* L); //pota
 
 		// Variant
 		static int luaVariantCreate(lua_State* L);
@@ -774,6 +782,7 @@ class LuaScriptInterface
 		static int luaCreatureSetDirection(lua_State* L);
 
 		static int luaCreatureGetHealth(lua_State* L);
+		static int luaCreatureSetHealth(lua_State* L);
 		static int luaCreatureAddHealth(lua_State* L);
 		static int luaCreatureGetMaxHealth(lua_State* L);
 		static int luaCreatureSetMaxHealth(lua_State* L);
@@ -804,6 +813,8 @@ class LuaScriptInterface
 		static int luaCreatureGetDescription(lua_State* L);
 
 		static int luaCreatureGetPathTo(lua_State* L);
+		static int luaCreatureMove(lua_State* L);
+		static int luaCreatureGetWalkDelay(lua_State* L);
 
 		// Player
 		static int luaPlayerCreate(lua_State* L);
@@ -988,6 +999,11 @@ class LuaScriptInterface
 
 		static int luaMonsterSelectTarget(lua_State* L);
 		static int luaMonsterSearchTarget(lua_State* L);
+		//get exp from monsters
+		static int luaMonsterGetExperience(lua_State* L); //pota
+		static int luaMonsterSetExperience(lua_State* L); //pota
+		static int luaMonsterGetLevel(lua_State* L); //pota
+		static int luaMonsterGetBoost(lua_State* L); //pota
 
 		// Npc
 		static int luaNpcCreate(lua_State* L);
@@ -1172,6 +1188,22 @@ class LuaScriptInterface
 		static int luaMonsterTypeIsSummonable(lua_State* L);
 		static int luaMonsterTypeIsIllusionable(lua_State* L);
 		static int luaMonsterTypeIsHostile(lua_State* L);
+		static int luaMonsterTypeIsPassive(lua_State* L); //pota
+
+		static int luaMonsterTypeIsFlyable(lua_State* L);
+		static int luaMonsterTypeIsRideable(lua_State* L);
+		static int luaMonsterTypeIsSurfable(lua_State* L);
+		static int luaMonsterTypeCanTeleport(lua_State* L);
+		static int luaMonsterTypeCatchChance(lua_State* L);
+		static int luaMonsterTypeGetMoveMagicAttackBase(lua_State* L);
+		static int luaMonsterTypeGetMoveMagicDefenseBase(lua_State* L);
+
+		static int luaMonsterTypeHasShiny(lua_State* L);
+		static int luaMonsterTypeHasMega(lua_State* L);
+		static int luaMonsterTypeDexEntry(lua_State* L);
+		static int luaMonsterTypePortraitId(lua_State* L);
+
+
 		static int luaMonsterTypeIsPushable(lua_State* L);
 		static int luaMonsterTypeIsHealthShown(lua_State* L);
 
@@ -1193,17 +1225,24 @@ class LuaScriptInterface
 		static int luaMonsterTypeGetDefenseList(lua_State* L);
 		static int luaMonsterTypeGetElementList(lua_State* L);
 
+		static int luaMonsterTypeGetMoveList(lua_State* L); //pota
+
 		static int luaMonsterTypeGetVoices(lua_State* L);
 		static int luaMonsterTypeGetLoot(lua_State* L);
+
 		static int luaMonsterTypeGetCreatureEvents(lua_State* L);
 
 		static int luaMonsterTypeGetSummonList(lua_State* L);
+		static int luaMonsterTypeGetEvolutionList(lua_State* L); //pota
 		static int luaMonsterTypeGetMaxSummons(lua_State* L);
 
 		static int luaMonsterTypeGetArmor(lua_State* L);
 		static int luaMonsterTypeGetDefense(lua_State* L);
 		static int luaMonsterTypeGetOutfit(lua_State* L);
 		static int luaMonsterTypeGetRace(lua_State* L);
+		static int luaMonsterTypeGetRace2(lua_State* L); //pota
+		static int luaMonsterTypeGetMinLevel(lua_State* L); //pota
+		static int luaMonsterTypeGetMaxLevel(lua_State* L); //pota
 		static int luaMonsterTypeGetCorpseId(lua_State* L);
 		static int luaMonsterTypeGetManaCost(lua_State* L);
 		static int luaMonsterTypeGetBaseSpeed(lua_State* L);

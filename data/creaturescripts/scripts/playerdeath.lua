@@ -86,4 +86,13 @@ function onDeath(player, corpse, killer, mostDamageKiller, unjustified, mostDama
 			end
 		end
 	end
+
+	if player:isOnDive() then
+		player:setStorageValue(storageDive, -1)
+	end
+
+	if player:isOnSurf() then
+		player:setStorageValue(storageSurf, -1)
+	end
+
 end

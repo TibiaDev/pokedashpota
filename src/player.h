@@ -522,6 +522,10 @@ class Player final : public Creature, public Cylinder
 			return RACE_BLOOD;
 		}
 
+		RaceType_t getRace2() const final {
+			return RACE_BLOOD;
+		}
+
 		uint64_t getMoney() const;
 
 		//safe-trade functions
@@ -922,7 +926,7 @@ class Player final : public Creature, public Cylinder
 				client->sendIcons(getClientIcons());
 			}
 		}
-		void sendMagicEffect(const Position& pos, uint8_t type) const {
+		void sendMagicEffect(const Position& pos, uint16_t type) const {
 			if (client) {
 				client->sendMagicEffect(pos, type);
 			}
@@ -953,6 +957,11 @@ class Player final : public Creature, public Cylinder
 			if (client) {
 				client->sendTextMessage(message);
 			}
+		}
+		void sendAnimatedText (TextMessage& message) const { //pota
+			if (client) {
+				client->sendAnimatedMessage(message);    
+			}  
 		}
 		void sendReLoginWindow(uint8_t unfairFightReduction) const {
 			if (client) {

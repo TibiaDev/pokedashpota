@@ -69,8 +69,8 @@ bool Creature::canSee(const Position& myPos, const Position& pos, int32_t viewRa
 	}
 
 	const int_fast32_t offsetz = myPos.getZ() - pos.getZ();
-	return (pos.getX() >= myPos.getX() - viewRangeX + offsetz) && (pos.getX() <= myPos.getX() + viewRangeX + offsetz)
-		&& (pos.getY() >= myPos.getY() - viewRangeY + offsetz) && (pos.getY() <= myPos.getY() + viewRangeY + offsetz);
+	return (pos.getX() >= myPos.getX() - Map::maxViewportX + offsetz) && (pos.getX() <= myPos.getX() + Map::maxViewportX + offsetz) //pota
+		&& (pos.getY() >= myPos.getY() - Map::maxViewportY + offsetz) && (pos.getY() <= myPos.getY() + Map::maxViewportY + offsetz);
 }
 
 bool Creature::canSee(const Position& pos) const
@@ -468,13 +468,23 @@ void Creature::onCreatureMove(Creature* creature, const Tile* newTile, const Pos
 			stopEventWalk();
 		}
 
-		if (!summons.empty()) {
+		if (!summons.empty()) { //pota
 			//check if any of our summons is out of range (+/- 2 floors or 30 tiles away)
 			std::forward_list<Creature*> despawnList;
 			for (Creature* summon : summons) {
+				if (summon->hasCondition(CONDITION_MOVING)) { //pota
+					summon->removeCondition(CONDITION_MOVING);
+				}
+
 				const Position& pos = summon->getPosition();
-				if (Position::getDistanceZ(newPos, pos) > 2 || (std::max<int32_t>(Position::getDistanceX(newPos, pos), Position::getDistanceY(newPos, pos)) > 30)) {
-					despawnList.push_front(summon);
+				//added
+				Tile* destTile = g_game.map.getTile(newPos);
+
+				if (Position::getDistanceZ(newPos, pos) > 0 || (std::max<int32_t>(Position::getDistanceX(newPos, pos), Position::getDistanceY(newPos, pos)) > 12)) {
+					//changed, before: despawnList.push_front(summon);
+					g_game.map.moveCreature(*summon, *destTile);					
+					//added
+					g_game.addMagicEffect(pos, CONST_ME_TELEPORT);
 				}
 			}
 
@@ -703,6 +713,10 @@ bool Creature::dropCorpse(Creature* lastHitCreature, Creature* mostDamageCreatur
 				splash = Item::CreateItem(ITEM_FULLSPLASH, FLUID_BLOOD);
 				break;
 
+			case RACE_GRASS:
+				splash = Item::CreateItem(ITEM_FULLSPLASH, FLUID_GREEN);
+				break;
+
 			default:
 				splash = nullptr;
 				break;
@@ -728,6 +742,11 @@ bool Creature::dropCorpse(Creature* lastHitCreature, Creature* mostDamageCreatur
 
 		if (corpse) {
 			dropLoot(corpse->getContainer(), lastHitCreature);
+		}
+
+		//scripting event - onPostDeath
+		for (CreatureEvent* postDeathEvent : getCreatureEvents(CREATURE_EVENT_POSTDEATH)) { //pota
+			postDeathEvent->executeOnPostDeath(this, corpse, lastHitCreature, mostDamageCreature, lastHitUnjustified, mostDamageUnjustified);
 		}
 	}
 
@@ -995,6 +1014,13 @@ void Creature::addDamagePoints(Creature* attacker, int32_t damagePoints)
 
 	uint32_t attackerId = attacker->id;
 
+	if (attacker->isSummon()) { //pota		
+		Creature* master = attacker->getMaster();
+		if (Player* player = master->getPlayer()) {
+			attackerId = player->id;
+		}
+	}
+
 	auto it = damageMap.find(attackerId);
 	if (it == damageMap.end()) {
 		CountBlock_t cb;
@@ -1100,7 +1126,9 @@ void Creature::onGainExperience(uint64_t gainExp, Creature* target)
 		return;
 	}
 
-	gainExp /= 2;
+	//do not give exp to summons //pota
+	//gainExp /= 2; 
+
 	master->onGainExperience(gainExp, target);
 
 	SpectatorVec list;
@@ -1108,6 +1136,11 @@ void Creature::onGainExperience(uint64_t gainExp, Creature* target)
 	if (list.empty()) {
 		return;
 	}
+	//do not give exp to summons //pota
+	if (this->getMonster() || master->getMonster()) {
+		//master->onGainExperience(gainExp, target);
+        	return;
+    	}
 
 	TextMessage message(MESSAGE_EXPERIENCE_OTHERS, ucfirst(getNameDescription()) + " gained " + std::to_string(gainExp) + (gainExp != 1 ? " experience points." : " experience point."));
 	message.position = position;

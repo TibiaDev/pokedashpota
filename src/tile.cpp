@@ -1359,11 +1359,22 @@ void Tile::postAddNotification(Thing* thing, const Cylinder* oldParent, int32_t 
 		}
 	}
 
-	if (link == LINK_OWNER) {
+	if (link == LINK_OWNER) { //pota
+		//calling movement scripts
+		bool postScript = false;
+
+		if (creature) {
+			postScript = g_moveEvents->onCreatureMove(creature, this, MOVE_EVENT_STEP_IN);
+		} else if (item) {
+			g_moveEvents->onItemMove(item, this, true);
+		}
+
 		if (hasFlag(TILESTATE_TELEPORT)) {
-			Teleport* teleport = getTeleportItem();
-			if (teleport) {
-				teleport->addThing(thing);
+			if (postScript) {
+				Teleport* teleport = getTeleportItem();
+				if (teleport) {
+					teleport->addThing(thing);
+				}
 			}
 		} else if (hasFlag(TILESTATE_TRASHHOLDER)) {
 			TrashHolder* trashholder = getTrashHolder();
@@ -1375,13 +1386,6 @@ void Tile::postAddNotification(Thing* thing, const Cylinder* oldParent, int32_t 
 			if (mailbox) {
 				mailbox->addThing(thing);
 			}
-		}
-
-		//calling movement scripts
-		if (creature) {
-			g_moveEvents->onCreatureMove(creature, this, MOVE_EVENT_STEP_IN);
-		} else if (item) {
-			g_moveEvents->onItemMove(item, this, true);
 		}
 	}
 

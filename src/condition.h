@@ -399,6 +399,20 @@ class ConditionSpellCooldown final : public ConditionGeneric
 		}
 };
 
+class ConditionStatus final : public ConditionGeneric //pota
+{
+	public:
+		ConditionStatus(ConditionId_t id, ConditionType_t type, int32_t ticks, bool buff = false, uint32_t subId = 0) :
+			ConditionGeneric(id, type, ticks, buff, subId) {}
+
+		bool startCondition(Creature* creature) final;
+		void addCondition(Creature* creature, const Condition* condition) final;
+
+		ConditionStatus* clone() const final {
+			return new ConditionStatus(*this);
+		}
+};
+
 class ConditionSpellGroupCooldown final : public ConditionGeneric
 {
 	public:

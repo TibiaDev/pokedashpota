@@ -46,6 +46,16 @@ class ConfigManager
 			LAST_BOOLEAN_CONFIG /* this must be the last one */
 		};
 
+		enum double_config_t { //pota
+			MONSTERLEVEL_BONUSEXP,
+			MONSTERLEVEL_BONUSDMG,
+			MONSTERLEVEL_BONUSSPEED,
+			MONSTERLEVEL_BONUSLOOT,
+			MONSTERLEVEL_BONUSHEALTH,
+
+			LAST_DOUBLE_CONFIG
+		};
+
 		enum string_config_t {
 			DUMMY_STR,
 			MAP_NAME,
@@ -65,6 +75,7 @@ class ConfigManager
 			MYSQL_SOCK,
 			DEFAULT_PRIORITY,
 			MAP_AUTHOR,
+			MONSTERLEVEL_PREFIX, //pota
 
 			LAST_STRING_CONFIG /* this must be the last one */
 		};
@@ -111,15 +122,18 @@ class ConfigManager
 		const std::string& getString(string_config_t what) const;
 		int32_t getNumber(integer_config_t what) const;
 		bool getBoolean(boolean_config_t what) const;
+		double getDouble(double_config_t what) const; //pota
 
 	private:
 		static std::string getGlobalString(lua_State* L, const char* identifier, const char* defaultValue);
 		static int32_t getGlobalNumber(lua_State* L, const char* identifier, const int32_t defaultValue = 0);
 		static bool getGlobalBoolean(lua_State* L, const char* identifier, const bool defaultValue);
+		static double getGlobalDouble(lua_State* L, const char* identifier, const double defaultValue = 0.0); //pota
 
 		std::string string[LAST_STRING_CONFIG] = {};
 		int32_t integer[LAST_INTEGER_CONFIG] = {};
 		bool boolean[LAST_BOOLEAN_CONFIG] = {};
+		double decimal[LAST_DOUBLE_CONFIG] = {}; //pota
 
 		bool loaded = false;
 };
