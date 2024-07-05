@@ -19,11 +19,8 @@ function onStepIn(creature, item, position, fromPosition)
 end
 
 function onStepOut(creature, item, position, fromPosition)
-	local player = creature:getPlayer()
-	if player == nil then
-		return true
+	if not creature:isPlayer() then
+		creature:removeCondition(CONDITION_DROWN)
 	end
-
-	player:removeCondition(CONDITION_DROWN)
 	return true
 end

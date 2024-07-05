@@ -3,7 +3,7 @@ local maxSkill = 100
 
 function onUse(player, item, fromPosition, target, toPosition, isHotkey)
 	local targetId = target.itemid
-	if not isInArray(waterIds, target.itemid) then
+	if not table.contains(waterIds, target.itemid) then
 		return false
 	end
 

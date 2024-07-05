@@ -989,10 +989,10 @@
 	</conjure>
 -->
 	<!-- House Spells -->
-	<instant spellid="71" name="House Guest List" words="!invite" selftarget="1" aggressive="0" function="editHouseGuest" />
-	<instant spellid="72" name="House Subowner List" words="!invitesub" selftarget="1" aggressive="0" function="editHouseSubOwner" />
-	<instant spellid="73" name="House Door List" words="!invitedoor" selftarget="1" aggressive="0" function="editHouseDoor" />
-	<instant spellid="74" name="House Kick" words="!kick" params="1" aggressive="0" function="houseKick" />
+	<instant spellid="71" name="House Guest List" words="!invite" script="house/edit_guest_list.lua" />
+	<instant spellid="72" name="House Subowner List" words="!invitesub" script="house/edit_subowner_list.lua" />
+	<instant spellid="73" name="House Door List" words="!invitedoor" casterTargetOrDirection="1" aggressive="0" script="house/edit_door_list.lua" />
+	<instant spellid="74" name="House Kick" words="!kick" aggressive="0" playernameparam="1" params="1" script="house/kick.lua" />
 
 	<!-- Monster Spells -->
 	<instant name="ghastly dragon curse" words="###1" aggressive="1" blockwalls="1" needtarget="1" needlearn="1" script="monster/ghastly_dragon_curse.lua" />

@@ -38,6 +38,8 @@
 	<talkaction words="/setactionid" separator=" " script="set_actionid.lua" />
 	<talkaction words="/removeoutfit" separator=" " script="remove_outfit.lua" />
 	<talkaction words="/addpremium" separator=" " script="add_premium.lua" />
+	<talkaction words="/reload" separator=" " script="reload.lua" />
+	<talkaction words="/raid" separator=" " script="force_raid.lua" />
 
 	<!-- player talkactions -->
 	<talkaction words="!buypremium" script="buyprem.lua" />

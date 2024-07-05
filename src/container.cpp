@@ -1,6 +1,6 @@
 /**
  * The Forgotten Server - a free and open-source MMORPG server emulator
- * Copyright (C) 2016  Mark Samman <mark.samman@gmail.com>
+ * Copyright (C) 2017  Mark Samman <mark.samman@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -40,7 +40,7 @@ Container::Container(Tile* tile) : Container(ITEM_BROWSEFIELD, 30, false, true)
 	TileItemVector* itemVector = tile->getItemList();
 	if (itemVector) {
 		for (Item* item : *itemVector) {
-			if (item->getContainer() || item->hasProperty(CONST_PROP_MOVEABLE)) {
+			if ((item->getContainer() || item->hasProperty(CONST_PROP_MOVEABLE)) && !item->hasAttribute(ITEM_ATTRIBUTE_UNIQUEID)) {
 				itemlist.push_front(item);
 				item->setParent(this);
 			}

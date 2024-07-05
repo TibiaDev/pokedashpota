@@ -1,6 +1,6 @@
 /**
  * The Forgotten Server - a free and open-source MMORPG server emulator
- * Copyright (C) 2016  Mark Samman <mark.samman@gmail.com>
+ * Copyright (C) 2017  Mark Samman <mark.samman@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -234,17 +234,11 @@ uint32_t Spells::getInstantSpellCount(const Player* player) const
 	return count;
 }
 
-InstantSpell* Spells::getInstantSpellByIndex(const Player* player, uint32_t index)
+InstantSpell* Spells::getInstantSpellById(uint32_t spellId)
 {
-	uint32_t count = 0;
-	for (const auto& it : instants) {
-		InstantSpell* instantSpell = it.second;
-		if (instantSpell->canCast(player)) {
-			if (count == index) {
-				return instantSpell;
-			}
-			++count;
-		}
+	auto it = std::next(instants.begin(), std::min<uint32_t>(spellId, instants.size()));
+	if (it != instants.end()) {
+		return it->second;
 	}
 	return nullptr;
 }
@@ -1097,43 +1091,13 @@ bool Levitate(const InstantSpell*, Creature* creature, const std::string& param)
 	return true;
 }
 
-bool Illusion(const InstantSpell*, Creature* creature, const std::string& param)
-{
-	Player* player = creature->getPlayer();
-	if (!player) {
-		return false;
-	}
-
-	ReturnValue ret = Spell::CreateIllusion(creature, param, 180000);
-	if (ret != RETURNVALUE_NOERROR) {
-		player->sendCancelMessage(ret);
-		g_game.addMagicEffect(player->getPosition(), CONST_ME_POFF);
-		return false;
-	}
-
-	g_game.addMagicEffect(player->getPosition(), CONST_ME_MAGIC_RED);
-	return true;
-}
-
 }
 
 bool InstantSpell::loadFunction(const pugi::xml_attribute& attr)
 {
 	const char* functionName = attr.as_string();
-	if (strcasecmp(functionName, "edithouseguest") == 0) {
-		function = HouseGuestList;
-	} else if (strcasecmp(functionName, "edithousesubowner") == 0) {
-		function = HouseSubOwnerList;
-	} else if (strcasecmp(functionName, "edithousedoor") == 0) {
-		function = HouseDoorList;
-	} else if (strcasecmp(functionName, "housekick") == 0) {
-		function = HouseKick;
-	} else if (strcasecmp(functionName, "levitate") == 0) {
+	if (strcasecmp(functionName, "levitate") == 0) {
 		function = Levitate;
-	} else if (strcasecmp(functionName, "illusion") == 0) {
-		function = Illusion;
-	} else if (strcasecmp(functionName, "summonmonster") == 0) {
-		function = SummonMonster;
 	} else {
 		std::cout << "[Warning - InstantSpell::loadFunction] Function \"" << functionName << "\" does not exist." << std::endl;
 		return false;

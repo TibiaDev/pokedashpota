@@ -12,7 +12,5 @@ function onSay(player, words, param)
 		player:sendCancelMessage("Player not found.")
 		return false
 	end
-
-	player:teleportTo(target:getPosition())
 	return false
 end

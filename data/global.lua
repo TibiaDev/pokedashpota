@@ -119,6 +119,15 @@ function playerExists(name)
 	return false
 end
 
+table.contains = function(array, value)
+	for _, targetColumn in pairs(array) do
+		if targetColumn == value then
+			return true
+		end
+	end
+	return false
+end
+
 string.split = function(str, sep)
 	local res = {}
 	for v in str:gmatch("([^" .. sep .. "]+)") do
@@ -131,6 +140,6 @@ string.trim = function(str)
 	return str:match'^()%s*$' and '' or str:match'^%s*(.*%S)'
 end
 
-if nextUseStaminaTime == nil then
+if not nextUseStaminaTime then
 	nextUseStaminaTime = {}
 end
