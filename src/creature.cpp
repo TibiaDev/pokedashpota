@@ -1131,9 +1131,9 @@ void Creature::onGainExperience(uint64_t gainExp, Creature* target)
 
 	master->onGainExperience(gainExp, target);
 
-	SpectatorVec list;
-	g_game.map.getSpectators(list, position, false, true);
-	if (list.empty()) {
+	SpectatorHashSet spectators;
+	g_game.map.getSpectators(spectators, position, false, true);
+	if (spectators.empty()) {
 		return;
 	}
 	//do not give exp to summons //pota
@@ -1147,7 +1147,7 @@ void Creature::onGainExperience(uint64_t gainExp, Creature* target)
 	message.primary.color = TEXTCOLOR_WHITE_EXP;
 	message.primary.value = gainExp;
 
-	for (Creature* spectator : list) {
+	for (Creature* spectator : spectators) {
 		spectator->getPlayer()->sendTextMessage(message);
 	}
 }
