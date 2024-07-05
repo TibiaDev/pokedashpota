@@ -37,6 +37,9 @@ class ServicePort;
 typedef std::shared_ptr<ServicePort> ServicePort_ptr;
 typedef std::shared_ptr<const ServicePort> ConstServicePort_ptr;
 
+static constexpr int32_t CONNECTION_WRITE_TIMEOUT = 30;
+static constexpr int32_t CONNECTION_READ_TIMEOUT = 30;
+
 class ConnectionManager
 {
 	public:
